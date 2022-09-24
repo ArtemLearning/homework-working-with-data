@@ -6,6 +6,7 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
@@ -32,6 +33,17 @@ public class Model {
     @Column(name = "ENGINE_TYPE", nullable = false)
     @NotNull
     private String engineType;
+
+    @OneToMany(mappedBy = "model")
+    private List<Cars> cars;
+
+    public List<Cars> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Cars> cars) {
+        this.cars = cars;
+    }
 
     public EngineType getEngineType() {
         return engineType == null ? null : EngineType.fromId(engineType);
